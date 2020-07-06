@@ -1,19 +1,25 @@
 {
-  "name": "mars-colonization-tictactoe-genz",
+  "name": "tic-tac-toe",
   "version": "1.0.0",
-  "description": "Mars colonization project by Microsoft, tictactoe",
+  "description": "Tic Tac Toe implementation with Javascript ES2015",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "serve": "webpack-dev-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akanksha-sachan/Mars-colonization-tictactoe-GenZ.git"
-  },
-  "author": "Akanksha Sachan akanksha.11.05.07@gmail.com",
+  "author": "themegasm",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/akanksha-sachan/Mars-colonization-tictactoe-GenZ/issues"
-  },
-  "homepage": "https://github.com/akanksha-sachan/Mars-colonization-tictactoe-GenZ#readme"
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.8",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "file-loader": "^0.10.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^5.0.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  }
 }
