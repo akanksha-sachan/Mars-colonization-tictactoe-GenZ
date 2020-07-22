@@ -1,10 +1,7 @@
-
-
 import Board from './classes/Board';
 import Player from './classes/Player';
 import './style.scss';
 
-var bestmov;
 //Helpers (from http://jaketrent.com/post/addremove-classes-raw-javascript/)
 function hasClass(el, className) {
   if (el.classList)
@@ -62,7 +59,8 @@ function newGame(depth = -1, starting_player = 1) {
 
 	//If computer is going to start, choose a random cell as long as it is the center or a corner
 	if(!starting) {
-
+		//let center_and_corners = [0,2,4,6,8];
+		//let first_choice = center_and_corners[Math.floor(Math.random()*center_and_corners.length)];
 		let symbol = !maximizing ? 'x' : 'o';
 		b.insert(symbol, 4);
 		addClass(html_cells[4], symbol);
@@ -70,10 +68,8 @@ function newGame(depth = -1, starting_player = 1) {
 	}
 
 	//Adding Click event listener for each cell
-  	b.state.forEach((cell, index) =>
-  	{
-  		html_cells[index].addEventListener('click', () =>
-  		{
+  	b.state.forEach((cell, index) => {
+  		html_cells[index].addEventListener('click', () => {
   			//If cell is already occupied or the board is in a terminal state or it's not humans turn, return false
   			if(hasClass(html_cells[index], 'x') || hasClass(html_cells[index], 'o') || b.isTerminal() || !player_turn) return false;
 
@@ -89,139 +85,20 @@ function newGame(depth = -1, starting_player = 1) {
 				if(winner !== 'draw') addClass(document.getElementById("charachters"), 'celebrate_human');
   				drawWinningLine(b.isTerminal());
   			}
-
   			player_turn = 0; //Switch turns
 
-
   			//Get computer's best move and update the UI
-
-
-
-
-  			//Checking for horizontal wins
-  			bestmov = 100;
-  			var lv1=0;
-
-  			for (lv1=0; lv1<9;lv1++)
-  			{
-  				if( b.state[lv1] == b.state[lv1 + 1] && b.state[lv1] )
-  				{
-  		      		if( lv1==0 || lv1==3 || lv1==6 && (b.state[lv1 + 2]=='') )
-  		      		{
-  		      			bestmov = lv1 + 2;
-  					}
-
-  		      		if( lv1==1 || lv1==4 || lv1==7 &&  (b.state[lv1 - 1]=='') )
-  		      		{
-  		      			bestmov = lv1 - 1;
-  		      		}
-		        }
-
-		        if( b.state[lv1] == b.state[lv1 + 2] && b.state[lv1] && (b.state[lv1+1]=='') )
-  				{
-  		      		if( lv1==0 || lv1==3 || lv1==6)
-  		      		{
-  		      			bestmov = lv1 + 1;
-  		      		}
-  		      	}
-  			}
-
-
-  		    //Checking for vertical wins
-
-  		    var lv2 = 0;
-
-  		    for (lv2=0; lv1<3;lv1++)
-  			{
-  				if( b.state[lv1] == b.state[lv1 + 3] && b.state[lv1] && (b.state[lv1+6]==''))
-  				{
-  		         	bestmov = lv1 + 6;
-  				}
-
-		        if( b.state[lv1] == b.state[lv1 + 6] && b.state[lv1] && (b.state[lv1+3]==''))
-  				{
-  		      		bestmov = lv1 + 3;
-  		      	}
-  			}
-
-  		    if(b.state[3] == b.state[6] && b.state[3] && (b.state[0]==''))
-  		    {
-  		      	bestmov = 0;
-  		    }
-
-  		    if(b.state[4] == b.state[7] && b.state[4] && (b.state[1]==''))
-  		    {
-  		      	bestmov = 1;
-  		    }
-
-  		    if(b.state[5] == b.state[8] && b.state[5] && (b.state[2]==''))
-  		    {
-  		      	bestmov = 2;
-  		    }
-
-  		    //Checking for diagonal wins
-
-  		    if(b.state[0] == b.state[4] && b.state[0] && (b.state[8]=='')) {
-  		          bestmov = 8;
-  		    }
-  		    if(b.state[0] == b.state[8] && b.state[0] && (b.state[4]=='')) {
-  		          bestmov = 4;
-  		    }
-  		    if(b.state[4] == b.state[8] && b.state[4] && (b.state[0]=='')) {
-  		          bestmov = 0;
-  		    }
-  		    if(b.state[2] == b.state[4] && b.state[2] && (b.state[6]=='')) {
-  		          bestmov = 6;
-  		    }
-  		    if(b.state[2] == b.state[6] && b.state[2] && (b.state[4]=='')) {
-  		          bestmov = 4;
-  		    }
-  		    if(b.state[4] == b.state[6] && b.state[4] && (b.state[2]=='')) {
-  		          bestmov = 2;
-  		    }
-
-  		    if(bestmov!=100)
-  		    {
-
-  		    	let symbol = !maximizing ? 'x' : 'o';
-  		    	b.insert(symbol, bestmov);
-  				addClass(html_cells[ bestmov ], symbol);
-
-  				if(b.isTerminal())
-  				{
+  			p.getBestMove(b, -100, 100, !maximizing, best => {
+  				let symbol = !maximizing ? 'x' : 'o';
+  				b.insert(symbol, best);
+  				addClass(html_cells[best], symbol);
+  				if(b.isTerminal()) {
 	  				let { winner } = b.isTerminal();
 					if(winner !== 'draw') addClass(document.getElementById("charachters"), 'celebrate_robot');
 	  				drawWinningLine(b.isTerminal());
 	  			}
-
   				player_turn = 1; //Switch turns
-
-
-  		    }
-
-
-
-  			if(bestmov == 100)
-  			{
-  				p.getBestMove(b, -100, 100, !maximizing, best =>
-  				{
-
-  					let symbol = !maximizing ? 'x' : 'o';
-  					b.insert(symbol, best);
-  					addClass(html_cells[best], symbol);
-
-  					if(b.isTerminal()) 
-  					{
-	  					let { winner } = b.isTerminal();
-						if(winner !== 'draw') addClass(document.getElementById("charachters"), 'celebrate_robot');
-	  					drawWinningLine(b.isTerminal());
-	  				}
-
-  					player_turn = 1; //Switch turns
-  				});
-  			}
-  			bestmov = 100;
-
+  			});
   		}, false);
   		if(cell) addClass(html_cells[index], cell);
   	});
