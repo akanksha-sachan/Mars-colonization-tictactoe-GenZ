@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -68,7 +68,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -209,9 +209,9 @@ var Board = function () {
 
 exports.default = Board;
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -349,7 +349,7 @@ var Player = function () {
 					}
 
 					if (alpha >= beta) {
-						break;
+						continue;
 					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
@@ -415,6 +415,9 @@ var Player = function () {
 						var moves = this.nodes_map.has(_node_value) ? this.nodes_map.get(_node_value) + ',' + avail2[loopvar2] : avail2[loopvar2];
 						this.nodes_map.set(_node_value, moves);
 					}
+					if (beta <= alpha) {
+						continue;
+					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
 				if (depth == 0) {
@@ -447,15 +450,15 @@ var Player = function () {
 
 exports.default = Player;
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -613,6 +616,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	});
 });
 
-/***/ }
+/***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map

@@ -102,7 +102,7 @@ class Player {
 
 				if(alpha >= beta)
 				{
-					break;
+					continue;
 				}
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
@@ -168,6 +168,9 @@ class Player {
 					//Comma seperated indicies if multiple moves have the same heuristic value
 					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + avail2[loopvar2] : avail2[loopvar2];
 					this.nodes_map.set(node_value, moves);
+				}
+				if(beta <= alpha) {
+					continue;
 				}
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
