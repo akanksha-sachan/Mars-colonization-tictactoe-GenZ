@@ -332,7 +332,7 @@ var Player = function () {
 					best = Math.max(best, node_value);
 					alpha = Math.max(alpha, best);
 					if (alpha >= beta) {
-						break;
+						continue;
 					}
 
 					//Console Tracing Code
@@ -400,7 +400,7 @@ var Player = function () {
 					_best = Math.min(_best, _node_value);
 					beta = Math.min(_best, beta);
 					if (beta <= alpha) {
-						break;
+						continue;
 					}
 					//Console Tracing Code
 					if (TRACE) {

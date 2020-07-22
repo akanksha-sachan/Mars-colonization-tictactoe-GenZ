@@ -85,7 +85,7 @@ class Player {
 				alpha = Math.max(alpha, best);
 				if(alpha >= beta)
 				{
-					break;
+					continue;
 				}
 
 				//Console Tracing Code
@@ -156,7 +156,7 @@ class Player {
 				best = Math.min(best, node_value);
 				beta = Math.min(best, beta);
 				if(beta <= alpha) {
-					break;
+					continue;
 				}
 				//Console Tracing Code
 				if(TRACE) {
