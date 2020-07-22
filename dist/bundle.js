@@ -349,7 +349,7 @@ var Player = function () {
 					}
 
 					if (alpha >= beta) {
-						continue;
+						break;
 					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
@@ -416,7 +416,7 @@ var Player = function () {
 						this.nodes_map.set(_node_value, moves);
 					}
 					if (beta <= alpha) {
-						continue;
+						break;
 					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value

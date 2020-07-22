@@ -102,7 +102,7 @@ class Player {
 
 				if(alpha >= beta)
 				{
-					continue;
+					break;
 				}
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
@@ -170,7 +170,7 @@ class Player {
 					this.nodes_map.set(node_value, moves);
 				}
 				if(beta <= alpha) {
-					continue;
+					break;
 				}
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
