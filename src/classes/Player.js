@@ -83,6 +83,10 @@ class Player {
 				//Updating best value
 				best = Math.max(best, node_value);
 				alpha = Math.max(alpha, best);
+				if(alpha >= beta)
+				{
+					break;
+				}
 
 				//Console Tracing Code
 				if(TRACE) {
@@ -100,10 +104,7 @@ class Player {
 					this.nodes_map.set(node_value, moves);
 				}
 
-				if(alpha >= beta)
-				{
-					break;
-				}
+
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
 			if(depth == 0) {
@@ -154,6 +155,9 @@ class Player {
 				//Updating best value
 				best = Math.min(best, node_value);
 				beta = Math.min(best, beta);
+				if(beta <= alpha) {
+					break;
+				}
 				//Console Tracing Code
 				if(TRACE) {
 					if(depth == 0) {
@@ -169,9 +173,7 @@ class Player {
 					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + avail2[loopvar2] : avail2[loopvar2];
 					this.nodes_map.set(node_value, moves);
 				}
-				if(beta <= alpha) {
-					break;
-				}
+
 			}
 			//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
 			if(depth == 0) {

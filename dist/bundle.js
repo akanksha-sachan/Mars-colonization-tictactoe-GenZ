@@ -331,6 +331,9 @@ var Player = function () {
 					//Updating best value
 					best = Math.max(best, node_value);
 					alpha = Math.max(alpha, best);
+					if (alpha >= beta) {
+						break;
+					}
 
 					//Console Tracing Code
 					if (TRACE) {
@@ -346,10 +349,6 @@ var Player = function () {
 						//Comma seperated indicies if multiple moves have the same heuristic value
 						var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + avail[loopvar1] : avail[loopvar1];
 						this.nodes_map.set(node_value, moves);
-					}
-
-					if (alpha >= beta) {
-						break;
 					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
@@ -400,6 +399,9 @@ var Player = function () {
 					//Updating best value
 					_best = Math.min(_best, _node_value);
 					beta = Math.min(_best, beta);
+					if (beta <= alpha) {
+						break;
+					}
 					//Console Tracing Code
 					if (TRACE) {
 						if (depth == 0) {
@@ -414,9 +416,6 @@ var Player = function () {
 						//Comma seperated indicies if multiple moves have the same heuristic value
 						var moves = this.nodes_map.has(_node_value) ? this.nodes_map.get(_node_value) + ',' + avail2[loopvar2] : avail2[loopvar2];
 						this.nodes_map.set(_node_value, moves);
-					}
-					if (beta <= alpha) {
-						break;
 					}
 				}
 				//If it's the main call, return the index of the best move or a random index if multiple indicies have the same value
