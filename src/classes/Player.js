@@ -31,20 +31,20 @@ class Player {
   			
   			for (lv1=0; lv1<9;lv1++)
   			{
-  				if( b.state[lv1] == b.state[lv1 + 1] && b.state[lv1] ) 
+  				if( board.state[lv1] == board.state[lv1 + 1] && board.state[lv1] ) 
   				{
-  		      		if( lv1==0 || lv1==3 || lv1==6 && (b.state[lv1 + 2]=='') )
+  		      		if( lv1==0 || lv1==3 || lv1==6 && (board.state[lv1 + 2]=='') )
   		      		{
   		      			return  (lv1 + 2);
   					}
 
-  		      		if( lv1==1 || lv1==4 || lv1==7 &&  (b.state[lv1 - 1]=='') )
+  		      		if( lv1==1 || lv1==4 || lv1==7 &&  (board.state[lv1 - 1]=='') )
   		      		{
   		      			return  (lv1 - 1);	
   		      		}
 		        }
 
-		        if( b.state[lv1] == b.state[lv1 + 2] && b.state[lv1] && (b.state[lv1+1]=='') ) 
+		        if( board.state[lv1] == board.state[lv1 + 2] && board.state[lv1] && (board.state[lv1+1]=='') ) 
   				{
   		      		if( lv1==0 || lv1==3 || lv1==6)
   		      		{
@@ -60,50 +60,50 @@ class Player {
 
   		    for (lv2=0; lv1<3;lv1++)
   			{
-  				if( b.state[lv1] == b.state[lv1 + 3] && b.state[lv1] && (b.state[lv1+6]=='')) 
+  				if( board.state[lv1] == board.state[lv1 + 3] && board.state[lv1] && (board.state[lv1+6]=='')) 
   				{
   		         	return  (lv1 + 6);
   				}
 
-		        if( b.state[lv1] == b.state[lv1 + 6] && b.state[lv1] && (b.state[lv1+3]=='')) 
+		        if( board.state[lv1] == board.state[lv1 + 6] && board.state[lv1] && (board.state[lv1+3]=='')) 
   				{
   		      		return  (lv1 + 3);  		      				      		
   		      	}
   			}
   		      
-  		    if(b.state[3] == b.state[6] && b.state[3] && (b.state[0]==''))
+  		    if(board.state[3] == board.state[6] && board.state[3] && (board.state[0]==''))
   		    {
   		      	return  0; 		          
   		    }
 
-  		    if(b.state[4] == b.state[7] && b.state[4] && (b.state[1]==''))
+  		    if(board.state[4] == board.state[7] && board.state[4] && (board.state[1]==''))
   		    {
   		      	return  1;  		          
   		    }
 
-  		    if(b.state[5] == b.state[8] && b.state[5] && (b.state[2]==''))
+  		    if(board.state[5] == board.state[8] && board.state[5] && (board.state[2]==''))
   		    {
   		      	return  2;  		          
   		    }       
   		    
   		    //Checking for diagonal wins  		    
 
-  		    if(b.state[0] == b.state[4] && b.state[0] && (b.state[8]=='')) {
+  		    if(board.state[0] == board.state[4] && board.state[0] && (board.state[8]=='')) {
   		          return  8;
   		    }
-  		    if(b.state[0] == b.state[8] && b.state[0] && (b.state[4]=='')) {
+  		    if(board.state[0] == board.state[8] && board.state[0] && (board.state[4]=='')) {
   		          return  4;
   		    }
-  		    if(b.state[4] == b.state[8] && b.state[4] && (b.state[0]=='')) {
+  		    if(board.state[4] == board.state[8] && board.state[4] && (board.state[0]=='')) {
   		          return  0;
   		    }
-  		    if(b.state[2] == b.state[4] && b.state[2] && (b.state[6]=='')) {
+  		    if(board.state[2] == board.state[4] && board.state[2] && (board.state[6]=='')) {
   		          return  6;
   		    }
-  		    if(b.state[2] == b.state[6] && b.state[2] && (b.state[4]=='')) {
+  		    if(board.state[2] == board.state[6] && board.state[2] && (board.state[4]=='')) {
   		          return  4;
   		    }
-  		    if(b.state[4] == b.state[6] && b.state[4] && (b.state[2]=='')) {
+  		    if(board.state[4] == board.state[6] && board.state[4] && (board.state[2]=='')) {
   		          return  2; 
   		    }
 
