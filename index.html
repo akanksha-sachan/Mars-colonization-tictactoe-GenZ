@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tic Tac Toe with Javascript</title>
+	<title>Tic Tac Toe GenZ</title>
 	<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="dist/style.css">
@@ -39,6 +39,17 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="field">
+					<label>Game type</label>
+					<div class="game_type_choices" id="game_type">
+						<ul>
+							<li data-value="1" class="active">SinglePlayer</li>
+							<li data-value="0">MultiPlayer</li>
+						</ul>
+					</div>
+				</div>
+
 				<div class="field">
 					<label>Depth</label>
 					<div class="depth_choices" id="depth">
@@ -63,8 +74,9 @@
 				</div>
 
 				<button id="newgame">New Game</button>
-				<p><a href="http://themegasm.net/tic-tac-toe-js-es2015-part-1-webpack/">See a tutorial</a> / <a href="https://github.com/alialaa/js-tic-tac-toe">View on Github</a></p>
-			</div>
+				<p>Player <span id="player">X</span> your turn</p> 
+				<p><a href="https://github.com/akanksha-sachan/Mars-colonization-tictactoe-GenZ.git">View on Github</a></p> 
+			</div> 
 		</div>
 		
 		<div id="board_wrap">
