@@ -528,7 +528,7 @@ function newGame() {
 	var html_cells = [].concat(_toConsumableArray(board.children));
 
 	//for single player
-	if (game_type) {
+	if (!game_type) {
 		//Initializing some variables for internal use
 		var starting = parseInt(starting_player),
 		    maximizing = starting,
@@ -585,42 +585,42 @@ function newGame() {
 		});
 	}
 	//for multiplayer
-	if (!game_type) {
+	else if (game_type) {
 
-		//make other buttons unclickable if multiplayer is chosen !?
-		//Initializing some variables for internal use
-		var currentPlayer = "x"; //stores player turns
+			//make other buttons unclickable if multiplayer is chosen !?
+			//Initializing some variables for internal use
+			var currentPlayer = "x"; //stores player turns
 
-		//Adding Click event listener for each cell
-		b.state.forEach(function (cell, index) {
-			html_cells[index].addEventListener('click', function () {
-				//If cell is already occupied or the board is in a terminal state, return false
-				if (hasClass(html_cells[index], 'x') || hasClass(html_cells[index], 'o') || b.isTerminal()) return false;
+			//Adding Click event listener for each cell
+			b.state.forEach(function (cell, index) {
+				html_cells[index].addEventListener('click', function () {
+					//If cell is already occupied or the board is in a terminal state, return false
+					if (hasClass(html_cells[index], 'x') || hasClass(html_cells[index], 'o') || b.isTerminal()) return false;
 
-				var symbol = currentPlayer;
+					var symbol = currentPlayer;
 
-				//Update the Board class instance as well as the Board UI
-				b.insert(symbol, index);
-				addClass(html_cells[index], symbol);
+					//Update the Board class instance as well as the Board UI
+					b.insert(symbol, index);
+					addClass(html_cells[index], symbol);
 
-				//change player turns
-				currentPlayer = currentPlayer == "x" ? "o" : "x";
+					//change player turns
+					currentPlayer = currentPlayer == "x" ? "o" : "x";
 
-				//changes player's turn label on bottom of the game, add to pop up? 
-				document.getElementById("player").innerHTML = currentPlayer.toUpperCase();
+					//changes player's turn label on bottom of the game, add to pop up? 
+					document.getElementById("player").innerHTML = currentPlayer.toUpperCase();
 
-				//If it's a terminal move and it's not a draw, then X won
-				if (b.isTerminal()) {
-					var _b$isTerminal3 = b.isTerminal(),
-					    winner = _b$isTerminal3.winner;
+					//If it's a terminal move and it's not a draw, then X won
+					if (b.isTerminal()) {
+						var _b$isTerminal3 = b.isTerminal(),
+						    winner = _b$isTerminal3.winner;
 
-					if (winner !== 'draw') addClass(document.getElementById("charachters"), 'celebrate_human');
-					drawWinningLine(b.isTerminal());
-				}
-			}, false);
-			if (cell) addClass(html_cells[index], cell);
-		});
-	}
+						if (winner !== 'draw') addClass(document.getElementById("charachters"), 'celebrate_human');
+						drawWinningLine(b.isTerminal());
+					}
+				}, false);
+				if (cell) addClass(html_cells[index], cell);
+			});
+		}
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -665,7 +665,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}, false);
 
 	document.getElementById("newgame").addEventListener('click', function () {
-		newGame(depth, starting_player_choicesplayer, game_type);
+		newGame(depth, starting_player, game_type);
 	});
 });
 

@@ -53,7 +53,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
 	let html_cells = [...board.children];
 
 	//for single player
-	if(game_type) {
+	if(!game_type) {
 		//Initializing some variables for internal use
 		let starting = parseInt(starting_player),
 			maximizing = starting,
@@ -106,7 +106,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
   		});
   	}
   	//for multiplayer
-  	if(!game_type) {
+  	else if(game_type) {
 
   		//make other buttons unclickable if multiplayer is chosen !?
   		//Initializing some variables for internal use
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", event => {
 	}, false);
 
 	document.getElementById("newgame").addEventListener('click', () => {
-		newGame(depth, starting_player_choicesplayer, game_type);
+		newGame(depth, starting_player, game_type);
 	});
 
 });
