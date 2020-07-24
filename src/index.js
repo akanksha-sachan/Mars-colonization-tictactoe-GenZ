@@ -127,7 +127,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
   				//change player turns
             	currentPlayer = currentPlayer == "x" ? "o" : "x";
 
-            	//changes player's turn label on bottom of the game, add to pop up? 
+            	//changes player's turn label text on bottom of the game 
             	document.getElementById(
               		"player"
             	).innerHTML = currentPlayer.toUpperCase();
@@ -150,10 +150,10 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
 document.addEventListener("DOMContentLoaded", event => {
 
 	//Start a new game when page loads with default values
-	//multiplayer and singleplayer option's default values
+	
 	let depth = -1;
 	let starting_player = 1; //human
-	let game_type = 1;
+	let game_type = 1; //singlePlayer
 	newGame(depth, starting_player, game_type); //gametype argument
 
 	//event listener for game type
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", event => {
 			removeClass(choice, 'active');
 		});
 		addClass(event.target, 'active');
-		depth = event.target.dataset.value;
+		depth = event.target.dataset.value; 
 	}, false);
 
 	document.getElementById("starting_player").addEventListener("click", (event) => {

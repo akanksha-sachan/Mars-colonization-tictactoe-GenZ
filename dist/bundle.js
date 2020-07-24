@@ -244,15 +244,6 @@ var Player = function () {
 		this.max_depth = max_depth;
 		this.nodes_map = new Map();
 	}
-	/**
-  * Uses minimax algorithm to get the best move
-  * @param {Object} board - an instant of the board class
-  * @param {Boolean} maximizing - whether the player is a maximizing or a minimizing player
-  * @param {Function} callback - a function to run after the best move calculation is done
-  * @param {Number} depth - used internally in the function to increment the depth each recursive call
-  * @return {Number} the index of the best move
-  */
-
 
 	_createClass(Player, [{
 		key: 'getBestMove',
@@ -263,78 +254,120 @@ var Player = function () {
 
 			//Throw an error if the first argument is not a board
 			if (board.constructor.name !== "Board") throw 'The first argument to the getBestMove method should be an instance of Board class.';
-			//Decides whether to log each tree iteration to the console
-			var TRACE = window.trace_ttt;
+
 			//clear nodes_map if the function is called for a new move
 			if (depth == 0) this.nodes_map.clear();
-			//Checking for horizontal wins
 
-			var lv1 = 0;
+			// //Checking for horizontal wins
+			// 	var bestmov = 100;
 
-			for (lv1 = 0; lv1 < 9; lv1++) {
-				if (board.state[lv1] == board.state[lv1 + 1] && board.state[lv1]) {
-					if (lv1 == 0 || lv1 == 3 || lv1 == 6 && board.state[lv1 + 2] == '') {
-						return lv1 + 2;
-					}
+			// 			var lv1=0;
 
-					if (lv1 == 1 || lv1 == 4 || lv1 == 7 && board.state[lv1 - 1] == '') {
-						return lv1 - 1;
-					}
-				}
+			// 			for (lv1=0; lv1<9;lv1++)
+			// 			{
+			// 				if( board.state[lv1] == board.state[lv1 + 1] && board.state[lv1] ) 
+			// 				{
+			// 		      		if( lv1==0 || lv1==3 || lv1==6 && (board.state[lv1 + 2]=='') )
+			// 		      		{
+			// 		      			bestmov =  (lv1 + 2);
+			// 		      			callback(bestmov);
+			// 		      			return bestmov;
+			// 					}
 
-				if (board.state[lv1] == board.state[lv1 + 2] && board.state[lv1] && board.state[lv1 + 1] == '') {
-					if (lv1 == 0 || lv1 == 3 || lv1 == 6) {
-						return lv1 + 1;
-					}
-				}
-			}
+			// 		      		if( lv1==1 || lv1==4 || lv1==7 &&  (board.state[lv1 - 1]=='') )
+			// 		      		{
+			// 		      			bestmov =  (lv1 - 1);	
+			// 		      			callback(bestmov);
+			// 		      			return bestmov;
+			// 		      		}
+			//         }
 
-			//Checking for vertical wins
+			//         if( board.state[lv1] == board.state[lv1 + 2] && board.state[lv1] && (board.state[lv1+1]=='') ) 
+			// 				{
+			// 		      		if( lv1==0 || lv1==3 || lv1==6)
+			// 		      		{
+			// 		      			bestmov =  (lv1 + 1);
+			// 		      			callback(bestmov);
+			// 		      			return bestmov;
+			// 		      		}
+			// 		      	}
+			// 			}		      
 
-			var lv2 = 0;
 
-			for (lv2 = 0; lv1 < 3; lv1++) {
-				if (board.state[lv1] == board.state[lv1 + 3] && board.state[lv1] && board.state[lv1 + 6] == '') {
-					return lv1 + 6;
-				}
+			// 		    //Checking for vertical wins
 
-				if (board.state[lv1] == board.state[lv1 + 6] && board.state[lv1] && board.state[lv1 + 3] == '') {
-					return lv1 + 3;
-				}
-			}
+			// 		    var lv2 = 0;
 
-			if (board.state[3] == board.state[6] && board.state[3] && board.state[0] == '') {
-				return 0;
-			}
+			// 		    for (lv2=0; lv1<3;lv1++)
+			// 			{
+			// 				if( board.state[lv1] == board.state[lv1 + 3] && board.state[lv1] && (board.state[lv1+6]=='')) 
+			// 				{
+			// 		         	bestmov =  (lv1 + 6);
+			// 		         	callback(bestmov);
+			// 		      		return bestmov;
+			// 				}
 
-			if (board.state[4] == board.state[7] && board.state[4] && board.state[1] == '') {
-				return 1;
-			}
+			//         if( board.state[lv1] == board.state[lv1 + 6] && board.state[lv1] && (board.state[lv1+3]=='')) 
+			// 				{
+			// 		      		bestmov =  (lv1 + 3); 
+			// 		      		callback(bestmov);
+			// 		      		return bestmov; 		      				      		
+			// 		      	}
+			// 			}
 
-			if (board.state[5] == board.state[8] && board.state[5] && board.state[2] == '') {
-				return 2;
-			}
+			// 		    if(board.state[3] == board.state[6] && board.state[3] && (board.state[0]==''))
+			// 		    {
+			// 		      	bestmov =  0; 
+			// 		      	callback(bestmov);
+			// 		      	return bestmov;		          
+			// 		    }
 
-			//Checking for diagonal wins  		    
+			// 		    if(board.state[4] == board.state[7] && board.state[4] && (board.state[1]==''))
+			// 		    {
+			// 		      	bestmov =  1;
+			// 		      	callback(bestmov);
+			// 		      	return bestmov;	  		          
+			// 		    }
 
-			if (board.state[0] == board.state[4] && board.state[0] && board.state[8] == '') {
-				return 8;
-			}
-			if (board.state[0] == board.state[8] && board.state[0] && board.state[4] == '') {
-				return 4;
-			}
-			if (board.state[4] == board.state[8] && board.state[4] && board.state[0] == '') {
-				return 0;
-			}
-			if (board.state[2] == board.state[4] && board.state[2] && board.state[6] == '') {
-				return 6;
-			}
-			if (board.state[2] == board.state[6] && board.state[2] && board.state[4] == '') {
-				return 4;
-			}
-			if (board.state[4] == board.state[6] && board.state[4] && board.state[2] == '') {
-				return 2;
-			}
+			// 		    if(board.state[5] == board.state[8] && board.state[5] && (board.state[2]==''))
+			// 		    {
+			// 		      	bestmov =  2;
+			// 		      	callback(bestmov);
+			// 		      	return bestmov;	  		          
+			// 		    }       
+
+			// 		    //Checking for diagonal wins  		    
+
+			// 		    if(board.state[0] == board.state[4] && board.state[0] && (board.state[8]=='')) {
+			// 		          bestmov =  8;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	
+			// 		    }
+			// 		    if(board.state[0] == board.state[8] && board.state[0] && (board.state[4]=='')) {
+			// 		          bestmov =  4;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	
+			// 		    }
+			// 		    if(board.state[4] == board.state[8] && board.state[4] && (board.state[0]=='')) {
+			// 		          bestmov =  0;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	
+			// 		    }
+			// 		    if(board.state[2] == board.state[4] && board.state[2] && (board.state[6]=='')) {
+			// 		          bestmov =  6;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	
+			// 		    }
+			// 		    if(board.state[2] == board.state[6] && board.state[2] && (board.state[4]=='')) {
+			// 		          bestmov =  4;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	
+			// 		    }
+			// 		    if(board.state[4] == board.state[6] && board.state[4] && (board.state[2]=='')) {
+			// 		          bestmov =  2;
+			// 		          callback(bestmov);
+			// 		      	return bestmov;	 
+			// 		    }
 
 			//If the board state is a terminal one, return the heuristic value
 			if (board.isTerminal() || depth == this.max_depth) {
@@ -344,34 +377,6 @@ var Player = function () {
 					return -100 + depth;
 				}
 				return 0;
-			}
-
-			//Defining some styles for console logging
-			var console_styles = {
-				turn_and_available_moves: 'background: #7f3192; color: #fff; font-size:14px;padding: 0 5px;',
-				exploring_parent: 'background: #353535;color: #fff;padding: 0 5px;font-size:18px',
-				exploring_child: 'background: #f03;color: #fff;padding: 0 5px',
-				parent_heuristic: 'background: #26d47c; color: #fff; font-size:14px;padding: 0 5px;',
-				child_heuristic: 'background: #5f9ead; color: #fff; font-size:14px;padding: 0 5px;',
-				all_moves: 'background: #e27a50;color: #fff;padding: 0 5px;font-size:14px',
-				best_move: 'background: #e8602a;color: #fff;padding: 0 5px;font-size:18px'
-			};
-			//Destructuring Styles
-			var turn_and_available_moves = console_styles.turn_and_available_moves,
-			    exploring_parent = console_styles.exploring_parent,
-			    exploring_child = console_styles.exploring_child,
-			    child_heuristic = console_styles.child_heuristic,
-			    parent_heuristic = console_styles.parent_heuristic,
-			    all_moves = console_styles.all_moves,
-			    best_move = console_styles.best_move;
-
-			//Console Tracing Code
-
-			if (TRACE) {
-				var p = maximizing ? 'Maximizing' : 'Minimizing';
-				console.log('%c' + p + ' player\'s turn Depth: ' + depth, turn_and_available_moves);
-				console.log('%cAvailable Moves: ' + board.getAvailableMoves().join(' '), turn_and_available_moves);
-				if (depth == 0) board.printFormattedBoard();
 			}
 
 			//Current player is maximizing
@@ -387,13 +392,6 @@ var Player = function () {
 					//Create a child node by inserting the maximizing symbol x into the current emoty cell
 					child.insert('x', avail[loopvar1]);
 
-					//Console Tracing Code
-					if (TRACE) {
-						var styles = depth == 0 ? exploring_parent : exploring_child;
-						console.log('%cExploring move ' + avail[loopvar1], styles);
-						child.printFormattedBoard();
-					}
-
 					//Recursively calling getBestMove this time with the new board and minimizing turn and incrementing the depth
 					var node_value = this.getBestMove(child, alpha, beta, false, callback, depth + 1);
 					//Updating best value
@@ -401,15 +399,6 @@ var Player = function () {
 					alpha = Math.max(alpha, best);
 					if (alpha >= beta) {
 						continue;
-					}
-
-					//Console Tracing Code
-					if (TRACE) {
-						if (depth == 0) {
-							console.log('%cMove ' + avail[loopvar1] + ' yielded a heuristic value of ' + node_value, parent_heuristic);
-						} else {
-							console.log('%cChild move ' + avail[loopvar1] + ' yielded a heuristic value of ' + node_value, child_heuristic);
-						}
 					}
 
 					//If it's the main function call, not a recursive one, map each heuristic value with it's moves indicies
@@ -428,13 +417,7 @@ var Player = function () {
 					} else {
 						ret = this.nodes_map.get(best);
 					}
-					//Console Tracing Code
-					if (TRACE) {
-						this.nodes_map.forEach(function (index, value) {
-							console.log('%cMove(s) ' + index + ' yielded ' + value, all_moves);
-						});
-						console.log('%cMove ' + ret + ' was decided as the best move', best_move);
-					}
+
 					//run a callback after calculation and return the index
 					callback(ret);
 					return ret;
@@ -444,7 +427,7 @@ var Player = function () {
 			}
 
 			if (!maximizing) {
-				//Initializ best to the highest possible value
+				//Initialise best to the highest possible value
 				var _best = 100;
 				//Loop through all empty cells
 				var avail2 = board.getAvailableMoves();
@@ -455,13 +438,6 @@ var Player = function () {
 					//Create a child node by inserting the minimizing symbol o into the current emoty cell
 					_child.insert('o', avail2[loopvar2]);
 
-					//Console Tracing Code
-					if (TRACE) {
-						var _styles = depth == 0 ? exploring_parent : exploring_child;
-						console.log('%cExploring move ' + avail2[loopvar2], _styles);
-						_child.printFormattedBoard();
-					}
-
 					//Recursively calling getBestMove this time with the new board and maximizing turn and incrementing the depth
 					var _node_value = this.getBestMove(_child, alpha, beta, true, callback, depth + 1);
 					//Updating best value
@@ -469,14 +445,6 @@ var Player = function () {
 					beta = Math.min(_best, beta);
 					if (beta <= alpha) {
 						continue;
-					}
-					//Console Tracing Code
-					if (TRACE) {
-						if (depth == 0) {
-							console.log('%cMove ' + avail2[loopvar2] + ' yielded a heuristic value of ' + _node_value, parent_heuristic);
-						} else {
-							console.log('%cChild move ' + avail2[loopvar2] + ' yielded a heuristic value of ' + _node_value, child_heuristic);
-						}
 					}
 
 					//If it's the main function call, not a recursive one, map each heuristic value with it's moves indicies
@@ -495,14 +463,7 @@ var Player = function () {
 					} else {
 						ret = this.nodes_map.get(_best);
 					}
-					//Console Tracing Code
-					if (TRACE) {
-						this.nodes_map.forEach(function (index, value) {
-							console.log('%cMove(s) ' + index + ' yielded ' + value, all_moves);
-						});
-						console.log('%cMove ' + ret + ' was decided as the best move', best_move);
-					}
-					//run a callback after calculation and return the index
+
 					callback(ret);
 					return ret;
 				}
@@ -674,7 +635,7 @@ function newGame() {
 					//change player turns
 					currentPlayer = currentPlayer == "x" ? "o" : "x";
 
-					//changes player's turn label on bottom of the game, add to pop up? 
+					//changes player's turn label text on bottom of the game 
 					document.getElementById("player").innerHTML = currentPlayer.toUpperCase();
 
 					//If it's a terminal move and it's not a draw, then X won
@@ -694,10 +655,10 @@ function newGame() {
 document.addEventListener("DOMContentLoaded", function (event) {
 
 	//Start a new game when page loads with default values
-	//multiplayer and singleplayer option's default values
+
 	var depth = -1;
 	var starting_player = 1; //human
-	var game_type = 1;
+	var game_type = 1; //singlePlayer
 	newGame(depth, starting_player, game_type); //gametype argument
 
 	//event listener for game type
