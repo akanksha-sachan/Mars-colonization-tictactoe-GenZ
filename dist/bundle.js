@@ -602,12 +602,12 @@ function newGame() {
 
 								//call get best move for the new board state for the hint
 								p.getBestMove(b, -100, 100, maximizing, function (best) {
-										move0 = best + 1;
+										move0 = best;
 								});
 								//convert integer to string 
-								cell_number = move0.toString();
+
 								//update the UI with the hint for the best move
-								document.getElementById("move").innerHTML = cell_number;
+								document.getElementById("move").innerHTML = move0;
 						}, false);
 						if (cell) addClass(html_cells[index], cell);
 				});
