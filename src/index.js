@@ -39,7 +39,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
 	//Instantiating a new player and an empty board
 	let p = new Player(parseInt(depth));
 	let b = new Board(['','','','','','','','','']);
-
+	let gametype = parseInt(game_type);
 	//Clearing all #Board classes and populating cells HTML
 	let board = document.getElementById("board");
 	board.className = '';
@@ -53,7 +53,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
 	let html_cells = [...board.children];
 
 	//for single player
-	if(game_type) {
+	if(gametype) {
 		//Initializing some variables for internal use
 		let starting = parseInt(starting_player),
 			maximizing = starting,
@@ -69,7 +69,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
 			player_turn = 1; //Switch turns
 		}
 
-		//Adding Click event listener for each cell
+		//Adding Click event listener for each cell on the board
   		b.state.forEach((cell, index) => {
   			html_cells[index].addEventListener('click', () => {
   				//If cell is already occupied or the board is in a terminal state or it's not humans turn, return false
@@ -106,7 +106,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
   		});
   	}
   	//for multiplayer
-  	else if(!game_type) {
+  	else if(!gametype) {
 
   		//make other buttons unclickable if multiplayer is chosen !?
   		//Initializing some variables for internal use
@@ -181,9 +181,9 @@ document.addEventListener("DOMContentLoaded", event => {
 	document.getElementById("starting_player").addEventListener("click", (event) => {
 		if(event.target.tagName !== "LI" || hasClass(event.target, 'active')) return
 		let starting_player_choices = [...document.getElementById("starting_player").children[0].children];
-		starting_player_choices.forEach((choice) => {
-			removeClass(choice, 'active');
-		});
+		starting_player_choices.forEach((choice) => { 
+			removeClass(choice, 'active'); 
+		});   
 		addClass(event.target, 'active');
 		starting_player = event.target.dataset.value;
 	}, false);
