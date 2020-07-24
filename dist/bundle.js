@@ -550,6 +550,9 @@ function newGame() {
 				    maximizing = starting,
 				    player_turn = starting;
 
+				var move0 = -1;
+				var cell_number = '';
+
 				//If computer is going to start, choose center
 				if (!starting) {
 						//let center_and_corners = [0,2,4,6,8];
@@ -596,6 +599,15 @@ function newGame() {
 										}
 										player_turn = 1; //Switch turns
 								});
+
+								//call get best move for the new board state for the hint
+								p.getBestMove(b, -100, 100, maximizing, function (best) {
+										move0 = best + 1;
+								});
+								//convert integer to string 
+								cell_number = move0.toString();
+								//update the UI with the hint for the best move
+								document.getElementById("move").innerHTML = cell_number;
 						}, false);
 						if (cell) addClass(html_cells[index], cell);
 				});
