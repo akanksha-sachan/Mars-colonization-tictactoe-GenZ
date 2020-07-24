@@ -96,23 +96,10 @@ var Board = function () {
     }
     //Logs a visualised board with the current state to the console
 
+    //Checks if board has no symbols yet
+
 
     _createClass(Board, [{
-        key: 'printFormattedBoard',
-        value: function printFormattedBoard() {
-            var formattedString = '';
-            this.state.forEach(function (cell, index) {
-                formattedString += cell ? ' ' + cell + ' |' : '   |';
-                if ((index + 1) % 3 == 0) {
-                    formattedString = formattedString.slice(0, -1);
-                    if (index < 8) formattedString += '\n\u2015\u2015\u2015 \u2015\u2015\u2015 \u2015\u2015\u2015\n';
-                }
-            });
-            console.log('%c' + formattedString, 'color: #6d4e42;font-size:16px');
-        }
-        //Checks if board has no symbols yet
-
-    }, {
         key: 'isEmpty',
         value: function isEmpty() {
             return this.state.every(function (cell) {
