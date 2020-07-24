@@ -604,8 +604,7 @@ function newGame() {
 								p.getBestMove(b, -100, 100, maximizing, function (best) {
 										move0 = best;
 								});
-								//convert integer to string 
-
+								move0 += 1;
 								//update the UI with the hint for the best move
 								document.getElementById("move").innerHTML = move0;
 						}, false);

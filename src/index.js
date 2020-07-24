@@ -109,8 +109,7 @@ function newGame(depth = -1, starting_player = 1, game_type = 1) {
   				p.getBestMove(b, -100, 100, maximizing, best => {
   					move0 = best;
   				});
-  				//convert integer to string 
-  				
+  				move0+=1;
   				//update the UI with the hint for the best move
   				document.getElementById(
               		"move"
